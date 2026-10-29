@@ -1,0 +1,5 @@
+# Readable checker source: kept out of the public repo; build.sh publishes it encrypted
+checker/source.html
+# Local test builds
+checker/_test*.html
+.DS_Store
