@@ -23,14 +23,22 @@ Served by GitHub Pages at <https://artfry.github.io/helpdesktools/checker/>. The
 | `checker/source.html` | The readable page. **Not committed** (see `.gitignore`) |
 | `checker/index.html` | The published, encrypted page, built by `build.sh` |
 | `checker/probe/neutral.js`, `checker/probe/keywords.js` | Control and test files the page loads |
-| `build.sh` | Asks for the password, encrypts `source.html` into `index.html` |
+| `build.sh` | Encrypts `source.html` into `index.html`, using the password stored in the login Keychain (asks for it if none is stored) |
 | `.staticrypt.json` | StatiCrypt's salt (not secret). Changing it logs everyone out |
 
 ### Publishing a change
 
 1. Edit `checker/source.html` and test it locally (serve the repo folder and open `/checker/source.html`).
-2. Run `./build.sh` and enter the team password.
+2. Run `./build.sh`.
 3. Commit and push `checker/index.html`.
+
+The team password lives in the login Keychain under the service `helpdesktools-checker`. To store or change it (it prompts, so the password never appears in shell history):
+
+```bash
+security add-generic-password -U -a "$USER" -s helpdesktools-checker -w
+```
+
+After changing it, rebuild and push, and tell the team the new password.
 
 ### Simulate mode
 
